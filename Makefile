@@ -2,8 +2,26 @@
 
 .PHONY: all test clean deploy fund help install snapshot format anvil zktest
 
+anvil:
+	@anvil --block-time 1 --steps-tracing
+
+NETWORK_ARGS := --rpc-url http://localhost:8545 --account defaultKey --broadcast
+
+ifeq ($(findstring --network sepolia, $(ARGS)), --network sepolia)
+	NETWORK_ARGS := --rpc-url $(SEPOLIA_RPC_URL) --account metamask --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvv
+endif
+
 deploy:
-	@forge script script/DeployBasicNft.s.sol:DeployBasicNft --rpc-url $(SEPOLIA_RPC_URL) --account metamask --broadcast --verify --etherscan-api-key $(ETHERSCAN_API_KEY) -vvvv 
+	@forge script script/DeployBasicNft.s.sol:DeployBasicNft $(NETWORK_ARGS)
 
 mint:
-	@forge script script/Interactions.s.sol:MintBasicNft --rpc-url $(SEPOLIA_RPC_URL) --account metamask --broadcast -vvvv
+	@forge script script/Interactions.s.sol:MintBasicNft $(NETWORK_ARGS)
+
+deployMood:
+	@forge script script/DeployMoodNft.s.sol:DeployMoodNft $(NETWORK_ARGS)
+
+mintMoodNft:
+	@forge script script/Interactions.s.sol:MintMoodNft $(NETWORK_ARGS)
+
+flipMoodNft:
+	@forge script script/Interactions.s.sol:FlipMoodNft $(NETWORK_ARGS)
