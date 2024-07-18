@@ -25,12 +25,6 @@ MoodNft is an advanced NFT project where the entire metadata is stored on-chain.
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Contact
-
-If you have any questions or feedback, feel free to reach out:
-
-- GitHub: [Podziuu](https://github.com/Podziuu)
-
 ---
 
 Thank you for checking out the Foundry NFT projects! We hope you find them useful and informative.
